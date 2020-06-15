@@ -1,4 +1,4 @@
-# Portfolio frontend integration project, with HTML5, CSS3, Javascript and Bootstrap
+# Chat frontend integration project, with HTML5, CSS3, Javascript
 
 ## 🚀 To see project
 
