@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tchat</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="general">
+
+      <!-- HEADER -->
+      <div class="header">
+		    <img class= "avatar"src="img/avatar.jpg" alt="Avatar" style="width:10%">
+        <p class="pseudo">Clement Legrand</p>
+      </div>
+
+      <!-- SCREEN -->
+      <div class="screen date">
+        <div class="smilePopup hidden">
+          <button type="button">😊</button>
+          <button type="button">🤣</button>
+          <button type="button">😂</button>
+          <button type="button">😜</button>
+          <button type="button">😒</button>
+          <button type="button">😢</button>
+          <button type="button">🙃</button>
+          <button type="button">😀</button>
+          <button type="button">😁</button>
+          <button type="button">😍</button>
+          <button type="button">😘</button>
+          <button type="button">😆</button>
+          <button type="button">🤔</button>
+          <button type="button">😃</button>
+          <button type="button">😝</button>
+          <button type="button">🤤</button>
+          <button type="button">🤔</button>
+          <button type="button">🤨</button>
+          <button type="button">😏</button>
+          <button type="button">🤑</button>
+          <button type="button">😫</button>
+          <button type="button">😗</button>
+          <button type="button">😚</button>
+          <button type="button">🤗</button>
+          <button type="button">🤩</button>
+          <button type="button">😋</button>
+          <button type="button">🤐</button>
+          <button type="button">🤢</button>
+          <button type="button">💖</button>
+          <button type="button">🧡</button>
+          <button type="button">💛</button>
+          <button type="button">💙</button>
+          <button type="button">💚</button>
+          <button type="button">💜</button>
+          <button type="button">🖤</button>
+          <button type="button">🍕</button>
+          <button type="button">🍔</button>
+          <button type="button">🌭</button>
+          <button type="button">🥗</button>
+          <button type="button">🥙</button>
+          <button type="button">🍜</button>
+          <button type="button">🎁</button>
+          <button type="button">💪</button>
+          <button type="button">👌</button>
+          <button type="button">✌</button>
+          <button type="button">🤞</button>
+          <button type="button">👍</button>
+          <button type="button">🙌</button>
+        </div>
+        <div class="arrowDown hidden"></div>
+      </div>
+
+      <!-- KEYBOARD -->
+      <div class="keyboard">
+        <form class="form" action="index.html" method="post">
+          <textarea id="message" type="text" placeholder="Entrez votre message..." autocomplete="off"></textarea>
+            <div class="button_form">
+              <img class="sendEmoji" src="img/emojy.png" alt="">
+              <img class="sendButton" src="img/send.png" alt="">
+            </div>
+        </form>
+      </div>
+    </div>
+
+
+<script>
+var message = document.querySelector("textarea");
+var messageContent = message.value;
+var screen = document.querySelector(".screen");
+var $envoyer = document.querySelector(".sendButton");
+
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+// <!-- Function -->
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+function sendMessage() {
+  var newDiv = document.createElement("div");
+  var newP = document.createElement("p");
+  var timeDiv = document.createElement("div");
+  var messageValue = message.value;
+  // déclaration des variables pour l'heure
+  var now = new Date();
+  var heure   = now.getHours();
+  var minute  = now.getMinutes();
+  var timeDisplay = heure + ':' + minute;
+
+// Creation d'une nouvelle div pour contenir le message et l'heure
+  screen.appendChild(newDiv);
+  newDiv.classList.add('messageBox');
+
+// Creation d'un paragraphe pour le message dans la newDiv
+  newDiv.appendChild(newP);
+  console.log(newP);
+  newP.innerHTML = messageValue;
+  newP.classList.add('messageDisplay');
+
+// Creation d'une div pour l'heure dans la newDiv
+  newDiv.appendChild(timeDiv);
+  timeDiv.innerHTML = timeDisplay;
+  timeDiv.classList.add('timeDisplay');
+
+  // bloque le scroll en bas apres l'envoie d'un nouveau message
+  screen.scrollTop = screen.scrollHeight;
+  // supprime l'ancien contenu du textarea
+  document.querySelector("textarea").value = '';
+  //réinitialise le textarea
+  if(event.preventDefault) event.preventDefault();
+}
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+// <!-- End Function -->
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+// <!-- Emoji -->
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+// Afficher le popup des emoji
+var $emojiButton = document.querySelector(".sendEmoji");
+var $smilePopup = document.querySelector(".smilePopup");
+var $arrowDown = document.querySelector(".arrowDown");
+
+$emojiButton.addEventListener("click", function(){
+  $smilePopup.classList.toggle("hidden");
+  $arrowDown.classList.toggle("hidden");
+});
+
+// Récupérer la valeur du smiley au click, puis la mettre dans le textarea
+$smilePopup.addEventListener('click', function () {
+  let target = event.target;
+
+  if(target.type == 'button') {
+      message.value += target.textContent;
+  }
+});
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+// <!-- Emoji -->
+// <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+
+// Envoyer le message avec la touche enter
+document.onkeydown = function(){
+  if (window.event.keyCode == '13'){
+    sendMessage();
+  }
+}
+// Envoyer le message en cliquant sur le boutton send
+$envoyer.addEventListener("click", sendMessage);
+
+</script>
+  </body>
+</html>
